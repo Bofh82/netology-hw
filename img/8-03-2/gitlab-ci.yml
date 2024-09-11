@@ -1,0 +1,17 @@
+stages:
+  - test
+  - build
+
+test-job:
+  stage: test
+  tags:
+    - netology
+  script:
+    - /usr/local/go/bin/go test .
+
+build-job:
+  stage: build
+  tags:
+    - netology
+  script:
+    - /usr/local/go/bin/go build -o myapp
