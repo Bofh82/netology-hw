@@ -1,0 +1,74 @@
+16:38:21  Started by user Родионов Сергей
+
+16:38:21  [Pipeline] Start of Pipeline
+16:38:21  [Pipeline] node
+16:38:21  Running on kind-k8s
+ in /opt/jenkins/workspace/8-02-3
+16:38:21  [Pipeline] {
+16:38:21  [Pipeline] withEnv
+16:38:21  [Pipeline] {
+16:38:21  [Pipeline] stage
+16:38:21  [Pipeline] { (Checkout)
+16:38:21  [Pipeline] git
+16:38:21  The recommended git tool is: NONE
+16:38:21  using credential a6a55dc4-3b23-47ba-b523-9e48530c5bc6
+16:38:21  Fetching changes from the remote Git repository
+16:38:22  Checking out Revision 223dbc3f489784448004e020f2ef224f17a7b06d (refs/remotes/origin/main)
+16:38:22  Commit message: "Update README.md"
+16:38:22  [Pipeline] }
+16:38:22  [Pipeline] // stage
+16:38:22  [Pipeline] stage
+16:38:22  [Pipeline] { (Test)
+16:38:22  [Pipeline] sh
+16:38:22  + /usr/local/go/bin/go test .
+16:38:22  ok  	github.com/netology-code/sdvps-materials	(cached)
+16:38:22  [Pipeline] }
+16:38:22  [Pipeline] // stage
+16:38:21   > git rev-parse --resolve-git-dir /opt/jenkins/workspace/8-02-3/.git # timeout=10
+16:38:21   > git config remote.origin.url https://github.com/Bofh82/sdvps-materials.git # timeout=10
+16:38:21  Fetching upstream changes from https://github.com/Bofh82/sdvps-materials.git
+16:38:21   > git --version # timeout=10
+16:38:21   > git --version # 'git version 2.25.1'
+16:38:21  using GIT_ASKPASS to set credentials GitHub_Bofh82_Token
+16:38:21   > git fetch --tags --force --progress -- https://github.com/Bofh82/sdvps-materials.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+16:38:22   > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+16:38:22   > git config core.sparsecheckout # timeout=10
+16:38:22   > git checkout -f 223dbc3f489784448004e020f2ef224f17a7b06d # timeout=10
+16:38:22   > git branch -a -v --no-abbrev # timeout=10
+16:38:22   > git branch -D main # timeout=10
+16:38:22   > git checkout -b main 223dbc3f489784448004e020f2ef224f17a7b06d # timeout=10
+16:38:22  [Pipeline] stage
+16:38:22  [Pipeline] { (Build Binary)
+16:38:22  [Pipeline] sh
+16:38:23  + /usr/local/go/bin/go build -a -installsuffix nocgo -o myapp .
+16:38:25  [Pipeline] }
+16:38:25  [Pipeline] // stage
+16:38:25  [Pipeline] stage
+16:38:25  [Pipeline] { (Upload to Nexus)
+16:38:25  [Pipeline] script
+16:38:25  [Pipeline] {
+16:38:26  [Pipeline] withCredentials
+16:38:26  Masking supported pattern matches of $NEXUS_PASSWORD
+16:38:26  [Pipeline] {
+16:38:26  [Pipeline] sh
+16:38:26  Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+16:38:26  		 Affected argument(s) used the following variable(s): [NEXUS_PASSWORD]
+16:38:26  		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
+16:38:26  + curl -u admin:**** --upload-file myapp http://192.168.137.121:8081/repository/netology/
+16:38:26    % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+16:38:26                                   Dload  Upload   Total   Spent    Left  Speed
+16:38:26  
+16:38:26    0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+16:38:26  100 1821k    0     0  100 1821k      0  11.0M --:--:-- --:--:-- --:--:-- 11.0M
+16:38:26  [Pipeline] }
+16:38:26  [Pipeline] // withCredentials
+16:38:26  [Pipeline] }
+16:38:26  [Pipeline] // script
+16:38:26  [Pipeline] }
+16:38:26  [Pipeline] // stage
+16:38:26  [Pipeline] }
+16:38:26  [Pipeline] // withEnv
+16:38:26  [Pipeline] }
+16:38:26  [Pipeline] // node
+16:38:26  [Pipeline] End of Pipeline
+16:38:26  Finished: SUCCESS

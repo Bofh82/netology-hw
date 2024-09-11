@@ -1,0 +1,69 @@
+[2024-09-11T12:58:51.302Z] Started by user Родионов Сергей
+[2024-09-11T12:58:51.364Z] [Pipeline] Start of Pipeline
+[2024-09-11T12:58:51.601Z] [Pipeline] node
+[2024-09-11T12:58:51.652Z] Running on kind-k8s in /opt/jenkins/workspace/8-02-2
+[2024-09-11T12:58:51.675Z] [Pipeline] {
+[2024-09-11T12:58:51.759Z] [Pipeline] stage
+[2024-09-11T12:58:51.772Z] [Pipeline] { (Checkout)
+[2024-09-11T12:58:51.843Z] [Pipeline] git
+[2024-09-11T12:58:51.871Z] The recommended git tool is: NONE
+[2024-09-11T12:58:51.880Z] using credential a6a55dc4-3b23-47ba-b523-9e48530c5bc6
+[2024-09-11T12:58:51.898Z] Fetching changes from the remote Git repository
+[2024-09-11T12:58:52.323Z] Checking out Revision 223dbc3f489784448004e020f2ef224f17a7b06d (refs/remotes/origin/main)
+[2024-09-11T12:58:52.346Z] Commit message: "Update README.md"
+[2024-09-11T12:58:52.372Z] [Pipeline] }
+[2024-09-11T12:58:52.418Z] [Pipeline] // stage
+[2024-09-11T12:58:52.470Z] [Pipeline] stage
+[2024-09-11T12:58:52.483Z] [Pipeline] { (Test)
+[2024-09-11T12:58:52.547Z] [Pipeline] sh
+[2024-09-11T12:58:52.828Z] + /usr/local/go/bin/go test .
+[2024-09-11T12:58:52.828Z] ok  	github.com/netology-code/sdvps-materials	(cached)
+[2024-09-11T12:58:52.864Z] [Pipeline] }
+[2024-09-11T12:58:51.902Z]  > git rev-parse --resolve-git-dir /opt/jenkins/workspace/8-02-2/.git # timeout=10
+[2024-09-11T12:58:51.910Z]  > git config remote.origin.url https://github.com/Bofh82/sdvps-materials.git # timeout=10
+[2024-09-11T12:58:51.914Z] Fetching upstream changes from https://github.com/Bofh82/sdvps-materials.git
+[2024-09-11T12:58:51.914Z]  > git --version # timeout=10
+[2024-09-11T12:58:51.917Z]  > git --version # 'git version 2.25.1'
+[2024-09-11T12:58:51.917Z] using GIT_ASKPASS to set credentials GitHub_Bofh82_Token
+[2024-09-11T12:58:51.920Z]  > git fetch --tags --force --progress -- https://github.com/Bofh82/sdvps-materials.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+[2024-09-11T12:58:52.326Z]  > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+[2024-09-11T12:58:52.331Z]  > git config core.sparsecheckout # timeout=10
+[2024-09-11T12:58:52.334Z]  > git checkout -f 223dbc3f489784448004e020f2ef224f17a7b06d # timeout=10
+[2024-09-11T12:58:52.338Z]  > git branch -a -v --no-abbrev # timeout=10
+[2024-09-11T12:58:52.341Z]  > git branch -D main # timeout=10
+[2024-09-11T12:58:52.344Z]  > git checkout -b main 223dbc3f489784448004e020f2ef224f17a7b06d # timeout=10
+[2024-09-11T12:58:52.911Z] [Pipeline] // stage
+[2024-09-11T12:58:52.962Z] [Pipeline] stage
+[2024-09-11T12:58:52.975Z] [Pipeline] { (Build Docker Image)
+[2024-09-11T12:58:53.030Z] [Pipeline] sh
+[2024-09-11T12:58:53.326Z] + docker build .
+[2024-09-11T12:58:53.326Z] Sending build context to Docker daemon  248.8kB[2024-09-11T12:58:53.326Z] 
+[2024-09-11T12:58:53.326Z] Step 1/8 : FROM golang:1.16 AS builder
+[2024-09-11T12:58:53.326Z]  ---> 972d8c0bc0fc
+[2024-09-11T12:58:53.326Z] Step 2/8 : WORKDIR $GOPATH/src/github.com/netology-code/sdvps-materials
+[2024-09-11T12:58:53.326Z]  ---> Using cache
+[2024-09-11T12:58:53.326Z]  ---> 8c3f8d54d858
+[2024-09-11T12:58:53.326Z] Step 3/8 : COPY . ./
+[2024-09-11T12:58:53.586Z]  ---> 1f2a8ca999c9
+[2024-09-11T12:58:53.586Z] Step 4/8 : RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix nocgo -o /app .
+[2024-09-11T12:58:53.586Z]  ---> Running in 5605a8c7fbb1
+[2024-09-11T12:58:56.843Z] Removing intermediate container 5605a8c7fbb1
+[2024-09-11T12:58:56.843Z]  ---> c3879ccd1864
+[2024-09-11T12:58:56.843Z] Step 5/8 : FROM alpine:latest
+[2024-09-11T12:58:56.843Z]  ---> 91ef0af61f39
+[2024-09-11T12:58:56.843Z] Step 6/8 : RUN apk -U add ca-certificates
+[2024-09-11T12:58:56.843Z]  ---> Using cache
+[2024-09-11T12:58:56.843Z]  ---> 12e366cc5c76
+[2024-09-11T12:58:56.843Z] Step 7/8 : COPY --from=builder /app /app
+[2024-09-11T12:58:56.843Z]  ---> Using cache
+[2024-09-11T12:58:56.843Z]  ---> 9bd15e2a2949
+[2024-09-11T12:58:56.843Z] Step 8/8 : CMD ["/app"]
+[2024-09-11T12:58:56.843Z]  ---> Using cache
+[2024-09-11T12:58:56.843Z]  ---> 39383bbfc89e
+[2024-09-11T12:58:56.843Z] Successfully built 39383bbfc89e
+[2024-09-11T12:58:56.869Z] [Pipeline] }
+[2024-09-11T12:58:56.913Z] [Pipeline] // stage
+[2024-09-11T12:58:56.940Z] [Pipeline] }
+[2024-09-11T12:58:56.990Z] [Pipeline] // node
+[2024-09-11T12:58:57.015Z] [Pipeline] End of Pipeline
+[2024-09-11T12:58:57.074Z] Finished: SUCCESS
