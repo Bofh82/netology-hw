@@ -10,7 +10,9 @@
 
 ### Задание 2
 
-[Pipeline script](./img/8-02-2/pipeline.groovy)
+[gitlab-ci.yml](./img/8-03-2/gitlab-ci.yml)
 
-[Вывод консоли](./img/8-02-2/console.txt)
+[Вывод stage: test](./img/8-03-2/console.txt)
 
+Результат stage: build
+![Вывод stage: build](./img/8-03-2/8-03-2.png)

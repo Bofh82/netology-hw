@@ -1,0 +1,9 @@
+Running with gitlab-runner 11.2.0 (11.2.0)
+  on netology001 glrt-KVU
+Using Shell executor...
+Running on netology001...00:00
+Cloning repository...00:01
+Клонирование в «/var/lib/gitlab-runner/builds/glrt-KVU/0/netology/8-03»...
+Checking out 70b8c079 as main...
+Skipping Git submodules setup
+$ /usr/local/go/bin/go test .
