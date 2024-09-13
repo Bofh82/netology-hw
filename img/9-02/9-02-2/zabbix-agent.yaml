@@ -1,0 +1,28 @@
+---
+- name: Установка и настройка Zabbix Agent
+  hosts: netology002, netology003
+  become: yes
+  tasks:
+    - name: Установка Zabbix Agent
+      apt:
+        name: zabbix-agent
+        state: present
+
+    - name: Настройка конфигурации Zabbix Agent для подключения к серверу
+      lineinfile:
+        path: /etc/zabbix/zabbix_agentd.conf
+        regexp: '^Server='
+        line: 'Server=netology001'
+        state: present
+
+    - name: Комментирование строки ServerActive
+      replace:
+        path: /etc/zabbix/zabbix_agentd.conf
+        regexp: '^ServerActive=127.0.0.1'
+        replace: '#ServerActive=127.0.0.1'
+
+    - name: Запуск и включение Zabbix Agent
+      systemd:
+        name: zabbix-agent
+        state: started
+        enabled: yes

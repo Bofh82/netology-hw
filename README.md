@@ -1,18 +1,27 @@
-# "`GitLab`" - `Родионов Сергей`
+# "`Система мониторинга Zabbix`" - `Родионов Сергей`
 
 ### Задание 1
 
-Настройки раннера:
+Скриншот авторизации в админке:
 
-![Страница 1](./img/8-03-1/8-03-1.png)
+![](./img/9-02/9-02-1/9-02-1-1.png)
+
+Список команд для установки zabbix:
+
+[zabbix-install.md](./img/9-02/9-02-1/zabbix-install.md)
 
 ---
 
 ### Задание 2
 
-[gitlab-ci.yml](./img/8-03-2/gitlab-ci.yml)
+Cкриншот раздела Configuration > Hosts
+![](./img/9-02/9-02-2/9-02-2-1.png)
 
-[Вывод stage: test](./img/8-03-2/console.txt)
+Скриншот лога zabbix agent
+![](./img/9-02/9-02-2/9-02-2-2.png)
 
-Результат stage: build
-![Вывод stage: build](./img/8-03-2/8-03-2.png)
+Скриншот раздела Monitoring > Latest data
+![](./img/9-02/9-02-2/9-02-2-3.png)
+
+Текст использованных команд. Для разворачивания использовал ansible
+[zabbix-agent.yaml](./img/9-02/9-02-2/zabbix-agent.yaml)
