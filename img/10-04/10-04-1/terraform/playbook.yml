@@ -1,0 +1,21 @@
+---
+- name: Install and start nginx on Ubuntu servers
+  hosts: webservers
+  become: yes  # This will run tasks with sudo
+  become_method: sudo
+  become_user: root
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
