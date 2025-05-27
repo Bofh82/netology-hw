@@ -21,7 +21,7 @@ FLUSH PRIVILEGES;
 ```sql
 SHOW GRANTS FOR 'sys_temp'@'localhost';
 ```
-![](files\12\12-02\12-02-01-2.png)
+![](files/12/12-02/12-02-01-2.png)
 
 6. Переподключитесь к базе данных от имени sys_temp.
 
@@ -38,7 +38,7 @@ ALTER USER 'sys_test'@'localhost' IDENTIFIED WITH mysql_native_password BY 'pass
 USE sakila;
 SHOW TABLES;
 ```
-![](files\12\12-02\12-02-01-3.png)
+![](files/12/12-02/12-02-01-3.png)
 
 *Результатом работы должны быть скриншоты обозначенных заданий, а также простыня со всеми запросами.*
 
@@ -67,4 +67,4 @@ ORDER BY
     t.TABLE_NAME;
 ```
 Результат запроса:
-![](files\12\12-02\12-02-02-1.png)
+![](files/12/12-02/12-02-02-1.png)
