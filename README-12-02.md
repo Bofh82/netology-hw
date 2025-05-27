@@ -10,7 +10,7 @@ CREATE USER 'sys_temp'@'localhost' IDENTIFIED BY 'password';
 ```sql
 SELECT user, host FROM mysql.user;
 ```
-![](files\12\12-02\12-02-01-1.png)
+![](\files\12\12-02\12-02-01-1.png)
 
 4. Дайте все права для пользователя sys_temp. 
 ```sql
