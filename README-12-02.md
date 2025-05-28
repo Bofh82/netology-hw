@@ -50,21 +50,17 @@ customer         | customer_id
 ```
 ```sql
 SELECT 
-    t.TABLE_NAME AS 'Название таблицы',
-    IFNULL(
-        (SELECT GROUP_CONCAT(COLUMN_NAME ORDER BY ORDINAL_POSITION SEPARATOR ', ')
-         FROM INFORMATION_SCHEMA.COLUMNS c
-         WHERE c.TABLE_SCHEMA = t.TABLE_SCHEMA
-           AND c.TABLE_NAME = t.TABLE_NAME
-           AND c.COLUMN_KEY = 'PRI'),
-        'Нет первичного ключа (VIEW)'
-    ) AS 'Название первичного ключа'
+    TABLE_NAME AS 'Название таблицы',
+    GROUP_CONCAT(COLUMN_NAME ORDER BY ORDINAL_POSITION SEPARATOR ', ') AS 'Название первичного ключа'
 FROM 
-    INFORMATION_SCHEMA.TABLES t
+    INFORMATION_SCHEMA.COLUMNS
 WHERE 
-    t.TABLE_SCHEMA = 'sakila'
+    TABLE_SCHEMA = 'sakila'
+    AND COLUMN_KEY = 'PRI'
+GROUP BY 
+    TABLE_NAME
 ORDER BY 
-    t.TABLE_NAME;
+    TABLE_NAME;
 ```
 Результат запроса:
 ![](files/12/12-02/12-02-02-1.png)
